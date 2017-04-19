@@ -44,7 +44,7 @@ class CustomersListPresenterTests: XCTestCase {
 
     func test_init_shouldBindInteractorToStateLoaded_whenReceivingData() {
         // Act
-        let customer = Customer(firstName: "A", lastName: "AA", isGMail: true)
+        let customer = Customer(firstName: "A", lastName: "AA", email: "a@gmail.com")
         mockInteractor.customers.onNext(.success(items: [customer]))
         // Assert
         XCTAssertEqual(1, capturedStates.count)
@@ -53,7 +53,7 @@ class CustomersListPresenterTests: XCTestCase {
 
     func test_init_shouldBindInteractorToCustomers_whenReceivingData() {
         // Act
-        let customer = Customer(firstName: "A", lastName: "AA", isGMail: true)
+        let customer = Customer(firstName: "A", lastName: "AA", email: "a@gmail.com")
         mockInteractor.customers.onNext(.success(items: [customer]))
         // Assert
         XCTAssertEqual(1, capturedCustomers.count)
@@ -63,7 +63,7 @@ class CustomersListPresenterTests: XCTestCase {
 
     func test_handle_shouldTransformUserNameFull() {
         // Act
-        let customer = Customer(firstName: "A", lastName: "AA", isGMail: true)
+        let customer = Customer(firstName: "A", lastName: "AA", email: "a@gmail.com")
         mockInteractor.customers.onNext(.success(items: [customer]))
         // Arrange
         XCTAssertEqual("A AA", capturedCustomers[0].items[0].1)
@@ -71,7 +71,7 @@ class CustomersListPresenterTests: XCTestCase {
 
     func test_handle_shouldReturnBlueColorViewModel_whenCustomerIsGmail() {
         // Act
-        let customer = Customer(firstName: "A", lastName: "AA", isGMail: true)
+        let customer = Customer(firstName: "A", lastName: "AA", email: "a@gmail.com")
         mockInteractor.customers.onNext(.success(items: [customer]))
         // Assert
         XCTAssertEqual(UIColor.blue, capturedCustomers[0].items[0].0)
@@ -79,7 +79,7 @@ class CustomersListPresenterTests: XCTestCase {
 
     func test_handle_shouldReturnPurpleColorViewModel_whenCustomerIsNotGmail() {
         // Act
-        let customer = Customer(firstName: "A", lastName: "AA", isGMail: false)
+        let customer = Customer(firstName: "A", lastName: "AA", email: "a@yahoo.com")
         mockInteractor.customers.onNext(.success(items: [customer]))
         // Assert
         XCTAssertEqual(UIColor.purple, capturedCustomers[0].items[0].0)

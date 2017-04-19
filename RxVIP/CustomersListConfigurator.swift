@@ -27,12 +27,12 @@ class CustomersListConfigurator {
     // MARK: - Configuration
 
     func configure(viewController: CustomersListViewController) {
-        let presenter = CustomersListPresenter()
-        let router = CustomerListRouter(viewController: viewController)
-        let interactor = CustomersListInteractor(customerProvider: RandomCustomerRepository(), router: router)
-
-        presenter.input = interactor
-        viewController.input = presenter
-        viewController.output = interactor
+//        let presenter = CustomersListPresenter()
+//        let router = CustomerListRouter(viewController: viewController)
+//        let interactor = CustomersListInteractor(customerProvider: RandomCustomerRepository(), router: router)
+//
+//        presenter.input = interactor
+//        //viewController.input = presenter
+//        viewController.output = interactor
     }
 }

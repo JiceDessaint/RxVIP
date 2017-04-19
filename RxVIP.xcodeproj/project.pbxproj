@@ -14,6 +14,8 @@
 		C245FB341EA6651400F6EE99 /* CustomersListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C245FB2E1EA6651400F6EE99 /* CustomersListModels.swift */; };
 		C245FB351EA6651400F6EE99 /* CustomersListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C245FB2F1EA6651400F6EE99 /* CustomersListPresenter.swift */; };
 		C245FB361EA6651400F6EE99 /* CustomersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C245FB301EA6651400F6EE99 /* CustomersListViewController.swift */; };
+		C29D51D01EA7BB51003E85E0 /* SwinjectStoryboard+RxVIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29D51CF1EA7BB51003E85E0 /* SwinjectStoryboard+RxVIP.swift */; };
+		C29D51D21EA7C1FA003E85E0 /* MockCustomerListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29D51D11EA7C1FA003E85E0 /* MockCustomerListRouter.swift */; };
 		C2A2CDE31EA664500002FF27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A2CDE21EA664500002FF27 /* AppDelegate.swift */; };
 		C2A2CDE81EA664500002FF27 /* CustomerList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2A2CDE61EA664500002FF27 /* CustomerList.storyboard */; };
 		C2A2CDEA1EA664500002FF27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2A2CDE91EA664500002FF27 /* Assets.xcassets */; };
@@ -58,6 +60,8 @@
 		C245FB2E1EA6651400F6EE99 /* CustomersListModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomersListModels.swift; sourceTree = "<group>"; };
 		C245FB2F1EA6651400F6EE99 /* CustomersListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomersListPresenter.swift; sourceTree = "<group>"; };
 		C245FB301EA6651400F6EE99 /* CustomersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomersListViewController.swift; sourceTree = "<group>"; };
+		C29D51CF1EA7BB51003E85E0 /* SwinjectStoryboard+RxVIP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwinjectStoryboard+RxVIP.swift"; sourceTree = "<group>"; };
+		C29D51D11EA7C1FA003E85E0 /* MockCustomerListRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockCustomerListRouter.swift; sourceTree = "<group>"; };
 		C2A2CDDF1EA664500002FF27 /* RxVIP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxVIP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2A2CDE21EA664500002FF27 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C2A2CDE71EA664500002FF27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CustomerList.storyboard; sourceTree = "<group>"; };
@@ -145,6 +149,7 @@
 				C2A2CDE91EA664500002FF27 /* Assets.xcassets */,
 				C2A2CDEB1EA664500002FF27 /* LaunchScreen.storyboard */,
 				C2A2CDEE1EA664500002FF27 /* Info.plist */,
+				C29D51CF1EA7BB51003E85E0 /* SwinjectStoryboard+RxVIP.swift */,
 			);
 			path = RxVIP;
 			sourceTree = "<group>";
@@ -236,6 +241,7 @@
 			children = (
 				C2FC3DDA1EA7964B0041C69C /* MockCustomersListInteractor.swift */,
 				C2FC3DDC1EA796910041C69C /* MockCustomerRepository.swift */,
+				C29D51D11EA7C1FA003E85E0 /* MockCustomerListRouter.swift */,
 			);
 			name = Mocks;
 			sourceTree = "<group>";
@@ -470,6 +476,7 @@
 				3095DAD4B5443ED8313D2216 /* CustomerListRouter.swift in Sources */,
 				C2C149381EA7AB9C00ADF53A /* CustomerDetailModels.swift in Sources */,
 				C2C149361EA7A9B300ADF53A /* CustomerDetailPresenter.swift in Sources */,
+				C29D51D01EA7BB51003E85E0 /* SwinjectStoryboard+RxVIP.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +488,7 @@
 				C2FC3DD61EA76FE60041C69C /* CustomersListInteractorTests.swift in Sources */,
 				C2FC3DDB1EA7964B0041C69C /* MockCustomersListInteractor.swift in Sources */,
 				C2FC3DDD1EA796910041C69C /* MockCustomerRepository.swift in Sources */,
+				C29D51D21EA7C1FA003E85E0 /* MockCustomerListRouter.swift in Sources */,
 				C2A2CDF81EA664500002FF27 /* RxVIPTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

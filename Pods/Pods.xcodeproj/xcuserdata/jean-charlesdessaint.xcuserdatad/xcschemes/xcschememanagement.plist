@@ -7,77 +7,85 @@
 		<key>Alamofire.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>1</integer>
+			<false/>
 		</dict>
 		<key>Pods-RxVIP.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>2</integer>
+			<false/>
 		</dict>
 		<key>Pods-RxVIPTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>3</integer>
+			<false/>
 		</dict>
 		<key>RxAlamofire.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>4</integer>
+			<false/>
 		</dict>
 		<key>RxCocoa.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>5</integer>
+			<false/>
 		</dict>
 		<key>RxSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>6</integer>
+			<false/>
+		</dict>
+		<key>Swinject.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwinjectStoryboard.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>3429910ED508936E815DF429CF3D10B0</key>
+		<key>14FDA764C9B29F9647CFAD9DA8F5BE60</key>
 		<dict>
 			<key>primary</key>
-			<true />
+			<true/>
 		</dict>
-		<key>5145A6468B4E83211F7290B5B586AB85</key>
+		<key>57F7F49E7491645FEDB06C2F99AD9422</key>
 		<dict>
 			<key>primary</key>
-			<true />
+			<true/>
 		</dict>
 		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
 		<dict>
 			<key>primary</key>
-			<true />
+			<true/>
 		</dict>
-		<key>CA591A21FECD1BEAF8BEAF1C3CE14E0F</key>
+		<key>8BA226399D973589BEA90FAE27046074</key>
 		<dict>
 			<key>primary</key>
-			<true />
+			<true/>
 		</dict>
-		<key>E0A96FCA8698216EF200759A86BD5B8D</key>
+		<key>B4419B0A698DE118DCFBDFA4EF76A500</key>
 		<dict>
 			<key>primary</key>
-			<true />
+			<true/>
+		</dict>
+		<key>D203660D6B6BDF996AFFC747467B7DDE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DF81AB8735FC3A35E2F3AE658BD5375F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 		<key>FA36EB8B01CB06E99D766206E0DCE232</key>
 		<dict>
 			<key>primary</key>
-			<true />
+			<true/>
 		</dict>
 	</dict>
 </dict>

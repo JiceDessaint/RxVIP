@@ -21,11 +21,11 @@ class CustomerDetailConfigurator {
     // MARK: - Configuration
     
     func configure(viewController: CustomerDetailViewController) {
-        let presenter = CustomerDetailPresenter()
-        let interactor = CustomerDetailInteractor()
-        
-        presenter.input = interactor
-        viewController.input = presenter
-        viewController.output = interactor
+//        let presenter = CustomerDetailPresenter()
+//        let interactor = CustomerDetailInteractor()
+//        
+//        presenter.input = interactor
+//        viewController.input = presenter
+//        viewController.output = interactor
     }
 }

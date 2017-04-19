@@ -16,11 +16,12 @@ class CustomersListInteractorTests: XCTestCase {
     let bag = DisposeBag()
     var interactor: CustomersListInteractor!
     var mockRepository = MockCustomerRepository()
+    var mockRouter = MockCustomerListRouter()
     var capturedCustomers = Array<CustomersList.Refresh.Response>()
     
     override func setUp() {
         super.setUp()
-        interactor = CustomersListInteractor(customerProvider: mockRepository)
+        interactor = CustomersListInteractor(customerProvider: mockRepository, router: mockRouter)
         interactor.customers.subscribe(onNext: { (response) in
             self.capturedCustomers.append(response)
         }).addDisposableTo(bag)
@@ -31,8 +32,8 @@ class CustomersListInteractorTests: XCTestCase {
     func test_init_shouldBindRepositoryToOutput() {
         // Arrange
         let pushedCustomers = [
-            Customer(firstName: "A", lastName: "AA", isGMail: true),
-            Customer(firstName: "B", lastName: "BB", isGMail: false)
+            Customer(firstName: "A", lastName: "AA", email: "a@gmail.com"),
+            Customer(firstName: "B", lastName: "BB", email: "b@yahoo.com")
         ]
         // Act
         mockRepository._customersSubject.onNext(pushedCustomers)
@@ -63,6 +64,22 @@ class CustomersListInteractorTests: XCTestCase {
         interactor.refresh()
         // Assert
         XCTAssertEqual(1, mockRepository._resetCallsCount)
+    }
+    
+    // MARK: Navigation Tests --
+    
+    func test_showDetailForCell_shouldCallRouterWithCorrectCustomer() {
+        // Arrange
+        let pushedCustomers = [
+            Customer(firstName: "A", lastName: "AA", email: "a@gmail.com"),
+            Customer(firstName: "B", lastName: "BB", email: "b@yahoo.com")
+        ]
+        mockRepository._customersSubject.onNext(pushedCustomers)
+        // Act
+        interactor.showDetailForCell(at: IndexPath(row: 1, section: 0))
+        // Assert
+        XCTAssertEqual(1, mockRouter.capturedNavigateToDetail.count)
+        XCTAssertEqual(String(describing: pushedCustomers[1]), String(describing: mockRouter.capturedNavigateToDetail[0]))
     }
 
 }

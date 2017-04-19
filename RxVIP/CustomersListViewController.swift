@@ -30,10 +30,10 @@ class CustomersListViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var peopleTableView: UITableView!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        CustomersListConfigurator.sharedInstance.configure(viewController: self) // TODO
-    }
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        CustomersListConfigurator.sharedInstance.configure(viewController: self) // TODO
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

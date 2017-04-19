@@ -31,10 +31,10 @@ class CustomerDetailViewController: UIViewController {
     var output: CustomerDetailViewControllerOutput!
     let bag = DisposeBag()
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        CustomerDetailConfigurator.sharedInstance.configure(viewController: self)
-    }
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        CustomerDetailConfigurator.sharedInstance.configure(viewController: self)
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
