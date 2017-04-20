@@ -16,14 +16,14 @@ class CustomersListPresenterTests: XCTestCase {
     var presenter: CustomersListPresenter!
     var mockInteractor = MockCustomerListInteractor()
     
-    var capturedCustomers = Array<CustomersList.Refresh.ViewModel>()
+    var capturedCustomers = Array<CustomersListCommands.Refresh.ViewModel>()
     var capturedStates = [ViewModelState]()
     
     override func setUp() {
         super.setUp()
         presenter = CustomersListPresenter()
         presenter.input = mockInteractor
-        presenter.peoplesSubject.asObservable().subscribe(onNext: { viewModel in
+        presenter.customers.subscribe(onNext: { viewModel in
                 self.capturedCustomers.append(viewModel)
         }).addDisposableTo(bag)
         presenter.state.asObservable().subscribe(onNext: { state in
@@ -38,8 +38,8 @@ class CustomersListPresenterTests: XCTestCase {
         mockInteractor.customers.onNext(.loading)
         // Assert
         XCTAssertEqual(0, capturedCustomers.count)
-        XCTAssertEqual(1, capturedStates.count)
-        XCTAssertEqual(String(describing: ViewModelState.loading), String(describing: capturedStates[0]))
+        XCTAssertEqual(2, capturedStates.count)
+        XCTAssertEqual(String(describing: ViewModelState.loading), String(describing: capturedStates[1]))
     }
 
     func test_init_shouldBindInteractorToStateLoaded_whenReceivingData() {
@@ -47,8 +47,8 @@ class CustomersListPresenterTests: XCTestCase {
         let customer = Customer(firstName: "A", lastName: "AA", email: "a@gmail.com")
         mockInteractor.customers.onNext(.success(items: [customer]))
         // Assert
-        XCTAssertEqual(1, capturedStates.count)
-        XCTAssertEqual(String(describing: ViewModelState.loaded), String(describing: capturedStates[0]))
+        XCTAssertEqual(2, capturedStates.count)
+        XCTAssertEqual(String(describing: ViewModelState.loaded), String(describing: capturedStates[1]))
     }
 
     func test_init_shouldBindInteractorToCustomers_whenReceivingData() {
@@ -85,16 +85,6 @@ class CustomersListPresenterTests: XCTestCase {
         XCTAssertEqual(UIColor.purple, capturedCustomers[0].items[0].0)
     }
     
-    func test_handle_shouldReturnNil_whenUnableToTransformData() {
-        // Arrange
-        class MyError: Error {}
-        // Act
-        mockInteractor.customers.onNext(.error(error: MyError()))
-        // Assert
-        XCTAssertEqual(2, capturedStates.count)
-        let lastState = capturedStates[1]
-        XCTAssertEqual(String(describing: ViewModelState.error(message: "An error has occured")), String(describing: lastState))
-    }
     
     
 }

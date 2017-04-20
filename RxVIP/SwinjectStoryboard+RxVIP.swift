@@ -11,10 +11,22 @@ import SwinjectStoryboard
 
 extension SwinjectStoryboard {
     class func setup() {
+        
+        var arguments = ProcessInfo.processInfo.arguments
+        arguments.removeFirst()
+        print("App launched with the following arguments: \(arguments)")
+
+        if arguments.contains("UseMocks") {
+            defaultContainer.register(CustomerProvider.self) {_ in MockedCustomerRepository() }.inObjectScope(.container)
+        } else {
+            defaultContainer.register(CustomerProvider.self) {_ in RandomCustomerRepository() }.inObjectScope(.container)
+        }
+        
         defaultContainer.storyboardInitCompleted(CustomersListViewController.self) { r, c in
             let presenter = CustomersListPresenter()
             let router = CustomerListRouter(viewController: c)
-            let interactor = CustomersListInteractor(customerProvider: RandomCustomerRepository(), router: router)
+            let customerProvider = r.resolve(CustomerProvider.self)!
+            let interactor = CustomersListInteractor(customerProvider: customerProvider, router: router)
             
             presenter.input = interactor
             c.input = presenter

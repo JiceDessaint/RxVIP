@@ -12,9 +12,13 @@ import RxCocoa
 
 class CustomerDetailInteractor: CustomerDetailViewControllerOutput, CustomerDetailPresenterInput {
    
-    var customer = PublishSubject<Customer>()
+    private let customerSubject = PublishSubject<Customer>()
 
+    var customer: Observable<Customer> {
+        get { return customerSubject.asObservable() }
+    }
+    
     func load(customer: Customer) {
-        self.customer.onNext(customer)
+        self.customerSubject.onNext(customer)
     }
 }

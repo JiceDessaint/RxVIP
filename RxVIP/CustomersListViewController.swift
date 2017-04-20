@@ -11,29 +11,24 @@ import RxSwift
 import RxCocoa
 
 protocol CustomersListViewControllerInput {
-    var peoplesSubject: PublishSubject<CustomersList.Refresh.ViewModel> { get }
-    var state: PublishSubject<ViewModelState> { get }
+    var customers: Observable<CustomersListCommands.Refresh.ViewModel> { get }
+    var state: Observable<ViewModelState> { get }
 }
 
 protocol CustomersListViewControllerOutput {
     func refresh()
-    func showDetailForCell(at index:IndexPath)
+    func showDetailForCell(request: CustomersListCommands.ShowDetail.Request)
 }
 
 
 class CustomersListViewController: UIViewController {
     var input: CustomersListViewControllerInput!
     var output: CustomersListViewControllerOutput!
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var peopleTableView: UITableView!
-
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        CustomersListConfigurator.sharedInstance.configure(viewController: self) // TODO
-//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,21 +41,20 @@ class CustomersListViewController: UIViewController {
             self.output.refresh()
         }).addDisposableTo(disposeBag)
         peopleTableView.rx.itemSelected.subscribe(onNext: { indexPath in
-            self.output.showDetailForCell(at: indexPath)
+            let request = CustomersListCommands.ShowDetail.Request(indexPath: indexPath)
+            self.output.showDetailForCell(request: request)
         }).addDisposableTo(disposeBag)
     }
 
     private func configureInput() {
-        input.peoplesSubject
-                .asObservable()
-                .map {
-                    $0.items
-                }
-                .bindTo(peopleTableView.rx.items(cellIdentifier: "customerCell", cellType: CustomerCell.self)) { (_, element, cell) in
+        input.customers
+            .map { $0.items }
+            .bindTo(peopleTableView.rx.items(cellIdentifier: "customerCell", cellType: CustomerCell.self)) { (_, element, cell) in
                     cell.configure(color: element.0, name: element.1)
-                }.addDisposableTo(disposeBag)
+            }
+            .addDisposableTo(disposeBag)
 
-        input.state.asObservable().subscribe(onNext: { state in
+        input.state.subscribe(onNext: { state in
             switch state {
             case let .error(message):
                 print("error: \(message)") // UI Popup
@@ -69,7 +63,8 @@ class CustomersListViewController: UIViewController {
             default:
                 self.activityIndicator.stopAnimating()
             }
-        }).addDisposableTo(disposeBag)
+            })
+            .addDisposableTo(disposeBag)
     }
 
 

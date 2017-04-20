@@ -48,5 +48,22 @@ struct RandomCustomerRepository: CustomerProvider {
             
         }
     }
+}
 
+struct  MockedCustomerRepository: CustomerProvider {
+    private let customersSubject = PublishSubject<[Customer]>()
+    private let bag = DisposeBag()
+    var customers: Observable<[Customer]> {
+        get { return customersSubject.asObservable() }
+    }
+    
+    func reset() {
+        let customers = [
+            Customer(firstName: "Mark", lastName: "Zalzendorf", email: "marko@gmail.com"),
+            Customer(firstName: "Richard", lastName: "Brendan", email: "richard@gmail.com"),
+            Customer(firstName: "Zoe", lastName: "Charles", email: "zoe@yahoo.fr"),
+            Customer(firstName: "Ron", lastName: "Harris", email: "ron@outlook.fr"),
+        ]
+        self.customersSubject.onNext(customers)
+    }
 }

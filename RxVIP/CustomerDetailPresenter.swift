@@ -11,20 +11,27 @@ import RxSwift
 import RxCocoa
 
 protocol CustomerDetailPresenterInput {
-    var customer: PublishSubject<Customer> { get }
+    var customer: Observable<Customer> { get }
 }
 
 protocol CustomerDetailPresenterOutput {
-    var customerInfos: PublishSubject<CustomerDetail.ViewModel> { get }
+    var customerInfos: Observable<CustomerDetail.ViewModel> { get }
 }
 
 class CustomerDetailPresenter: CustomerDetailViewControllerInput {
-    var customerInfos = PublishSubject<CustomerDetail.ViewModel>()
-    let bag = DisposeBag()
+    private let customerInfosSubject = PublishSubject<CustomerDetail.ViewModel>()
+    private let bag = DisposeBag()
+    
+    var customerInfos: Observable<CustomerDetail.ViewModel> {
+        get { return customerInfosSubject.asObservable() }
+    }
     
     var input: CustomerDetailPresenterInput! {
         didSet {
-            input.customer.asObservable().map(handle).bindTo(customerInfos).addDisposableTo(bag)
+            input.customer
+                .map(handle)
+                .bindTo(customerInfosSubject)
+                .addDisposableTo(bag)
         }
     }
 

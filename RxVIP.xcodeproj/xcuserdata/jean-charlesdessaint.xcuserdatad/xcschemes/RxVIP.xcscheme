@@ -39,6 +39,16 @@
                ReferencedContainer = "container:RxVIP.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C29D51DC1EA7C7F4003E85E0"
+               BuildableName = "RxVIPUITests.xctest"
+               BlueprintName = "RxVIPUITests"
+               ReferencedContainer = "container:RxVIP.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

@@ -15,7 +15,7 @@ protocol CustomerDetailViewControllerOutput {
 }
 
 protocol CustomerDetailViewControllerInput {
-    var customerInfos: PublishSubject<CustomerDetail.ViewModel> { get }
+    var customerInfos: Observable<CustomerDetail.ViewModel> { get }
 
 }
 
@@ -29,13 +29,8 @@ class CustomerDetailViewController: UIViewController {
 
     var input: CustomerDetailViewControllerInput!
     var output: CustomerDetailViewControllerOutput!
-    let bag = DisposeBag()
+    private let bag = DisposeBag()
 
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        CustomerDetailConfigurator.sharedInstance.configure(viewController: self)
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureInput()
@@ -49,7 +44,7 @@ class CustomerDetailViewController: UIViewController {
     }
     
     private func configureInput() {
-        input.customerInfos.subscribe(onNext: { viewModel in
+        input.customerInfos.subscribe(onNext: { [unowned self] viewModel in
             self.configureWith(viewModel: viewModel)
         }).addDisposableTo(bag)
     }

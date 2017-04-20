@@ -17,7 +17,7 @@ class CustomersListInteractorTests: XCTestCase {
     var interactor: CustomersListInteractor!
     var mockRepository = MockCustomerRepository()
     var mockRouter = MockCustomerListRouter()
-    var capturedCustomers = Array<CustomersList.Refresh.Response>()
+    var capturedCustomers = Array<CustomersListCommands.Refresh.Response>()
     
     override func setUp() {
         super.setUp()
@@ -76,7 +76,8 @@ class CustomersListInteractorTests: XCTestCase {
         ]
         mockRepository._customersSubject.onNext(pushedCustomers)
         // Act
-        interactor.showDetailForCell(at: IndexPath(row: 1, section: 0))
+        let request = CustomersListCommands.ShowDetail.Request(indexPath: IndexPath(row: 1, section: 0))
+        interactor.showDetailForCell(request: request)
         // Assert
         XCTAssertEqual(1, mockRouter.capturedNavigateToDetail.count)
         XCTAssertEqual(String(describing: pushedCustomers[1]), String(describing: mockRouter.capturedNavigateToDetail[0]))

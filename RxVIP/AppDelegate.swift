@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SwinjectStoryboard
+import Swinject
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

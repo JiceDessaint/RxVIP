@@ -11,46 +11,58 @@ import RxSwift
 import RxCocoa
 
 protocol CustomersListPresenterInput {
-    var customers: PublishSubject<CustomersList.Refresh.Response> { get }
+    var customers: PublishSubject<CustomersListCommands.Refresh.Response> { get }
 }
 
 protocol CustomersListPresenterOutput {
-    var peopleSubjects: PublishSubject<CustomersList.Refresh.ViewModel> { get }
+    var peopleSubjects: PublishSubject<CustomersListCommands.Refresh.ViewModel> { get }
     var state: PublishSubject<ViewModelState> { get }
 }
 
-class CustomersListPresenter {
-    var peoplesSubject = PublishSubject<CustomersList.Refresh.ViewModel>()
-    var state = PublishSubject<ViewModelState>()
-    let bag = DisposeBag()
+class CustomersListPresenter: CustomersListViewControllerInput {
+    private let customersSubject = PublishSubject<CustomersListCommands.Refresh.ViewModel>()
+    private let stateSubject = BehaviorSubject<ViewModelState>(value: .loaded)
+    private let bag = DisposeBag()
+
+    var customers: Observable<CustomersListCommands.Refresh.ViewModel> {
+        get { return customersSubject.asObservable() }
+    }
+    var state: Observable<ViewModelState> {
+        get { return stateSubject.asObservable() }
+    }
 
     var input: CustomersListPresenterInput! {
         didSet {
-            input.customers.asObservable().subscribe(onNext: { (response) in
+            input.customers
+                .share()
+                .map { (response) -> ViewModelState in
                 if case .loading = response {
-                    self.state.onNext(.loading)
-                    return
+                    return ViewModelState.loading
                 }
+                return ViewModelState.loaded
+            }.bindTo(stateSubject).addDisposableTo(bag)
 
-                self.state.onNext(.loaded)
-                guard let a = self.handle(response) else {
-                    self.state.onNext(.error(message: "An error has occured"))
-                    return
-                }
-                self.peoplesSubject.onNext(a)
-
-            }).addDisposableTo(bag)
+            input.customers
+                .share()
+                .filter { (response) -> Bool in
+                    if case .success(_) = response {
+                        return true
+                    }
+                    return false
+            }.map { self.handle($0)! }
+            .bindTo(customersSubject)
+            .addDisposableTo(bag)
         }
     }
 
-    private func handle(_ request: CustomersList.Refresh.Response) -> CustomersList.Refresh.ViewModel? {
+    private func handle(_ request: CustomersListCommands.Refresh.Response) -> CustomersListCommands.Refresh.ViewModel? {
         guard case let .success(items:i) = request else {
             return nil
         }
         let tuples = i.map {
             ($0.isGMail ? UIColor.blue : UIColor.purple, "\($0.firstName) \($0.lastName)")
         }
-        return CustomersList.Refresh.ViewModel(items: tuples)
+        return CustomersListCommands.Refresh.ViewModel(items: tuples)
     }
 
 }

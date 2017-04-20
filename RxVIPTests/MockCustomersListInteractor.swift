@@ -11,5 +11,5 @@ import RxSwift
 @testable import RxVIP
 
 class MockCustomerListInteractor: CustomersListPresenterInput {
-    var customers = PublishSubject<CustomersList.Refresh.Response>()
+    var customers = PublishSubject<CustomersListCommands.Refresh.Response>()
 }

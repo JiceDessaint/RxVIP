@@ -14,10 +14,9 @@ enum ViewModelState {
     case error(message: String)
 }
 
-struct CustomersList {
+struct CustomersListCommands {
 
     struct Refresh {
-
         struct Request { // Keep it for example of a request with parameters
         }
 
@@ -26,11 +25,15 @@ struct CustomersList {
             case loading
             case error(error: Error)
         }
-
         struct ViewModel {
             let items: [(UIColor, String)]
         }
-
+    }
+    
+    struct ShowDetail {
+        struct Request {
+            let indexPath: IndexPath
+        }
     }
 
 }
